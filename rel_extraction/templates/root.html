@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="UTF-8"> 
+    <title>Entity Relationship Extraction demo</title>
+	<style type = "text/css">
+	* {
+    box-sizing: border-box;
+}
+ 
+/* body 样式 */
+body {
+    font-family: Arial;
+    margin: 0;
+}
+ 
+/* 标题 */
+.header {
+    padding: 40px;
+    text-align: center;
+    background: #1ab09c;
+    color: white;
+}
+ 
+/* 标题字体加大 */
+.header h1 {
+    font-size: 35px;
+}
+ 
+/* 导航 */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+ 
+/* 导航栏样式 */
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+ 
+/* 右侧链接*/
+.navbar a.right {
+    float: right;
+}
+ 
+/* 鼠标移动到链接的颜色 */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+ 
+/* 列容器 */
+.row {  
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+ 
+/* 创建两个列 */
+/* 边栏 */
+.side {
+    -ms-flex: 30%; /* IE10 */
+    flex: 30%;
+	text-align: left; 
+	padding: 2px;
+	overflow-x:scroll;
+}
+ 
+/* 主要的内容区域 */
+.main {   
+    -ms-flex: 70%; /* IE10 */
+    flex: 70%;
+    background-color: white;
+    padding: 20px;
+}
+ 
+/* 左列 */
+.fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+}
+
+.guide {
+    width: 100%;
+	font-size: 23px;
+	padding: 10px;
+	background-color:#1ab09c;
+}
+.guide1 {
+    width: 15%;
+	font-size: 18px;
+	height:200px;
+	text-align: left;
+	float:left;
+	overflow: auto;
+	background-color: #D8D8EB;
+}
+
+.resultset{
+	background-color:#D8D8EB; 
+	color:#000000; 
+	font-size: 18px; 
+	overflow: auto; 
+	height:350px;
+	width:100%; 
+	text-align: left;
+	overflow-y:scroll;
+}
+
+.div1{
+	float:left;
+	overflow: auto;
+	height:200px;
+	width:35%;
+	font-size: 18px; 
+	text-align: left; 
+	overflow-y:scroll;
+	background-color:#f1f1f1;
+}
+/* 底部 */
+.footer {
+    padding: 1px;
+    text-align: center;
+    background: #f1f1f1;
+}
+ 
+/* 响应式布局 - 在屏幕设备宽度尺寸小于 700px 时, 让两栏上下堆叠显示 */
+@media screen and (max-width: 700px) {
+    .row {   
+        flex-direction: column;
+    }
+}
+ 
+/* 响应式布局 - 在屏幕设备宽度尺寸小于 400px 时, 让导航栏目上下堆叠显示 */
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width: 100%;
+    }
+}
+
+</style> 
+  </head>
+
+<body>
+<div class="header">
+  <h1>Welcome to my project on Entity Relationship Extraction.</h1>
+</div>
+ 
+<div class="navbar">
+  <a href="#">实体关系抽取 | Entity Relationship Extraction</a>
+  <a href="#"></a>
+  <a href="#"></a>
+  <a href="#" class="right"></a>
+</div>
+ 
+<div class="row">
+  <div class="side">
+  <h2>针对以下关系类型抽取:</h2><h2>Relationship Types:</h2>
+      <div class="fakeimg" style="height:900px;width:450px;background-color: #f1f1f1;">
+				<p>1 /business/company/advisors</p>
+				<p>2 /business/company/founders</p>
+				<p>3 /business/company/industry</p>
+				<p>4 /business/company/major_shareholders</p>
+				<p>5 /business/company/place_founded</p>
+				<p>6 /business/company_shareholder/major_shareholder_of</p>
+				<p>7 /business/person/company</p>
+				<p>8 /location/administrative_division/country</p>
+				<p>9 /location/country/administrative_divisions</p>
+				<p>10 /location/country/capital</p>
+				<p>11 /location/location/contains</p>
+				<p>12 /location/neighborhood/neighborhood_of</p>
+				<p>13 /people/deceased_person/place_of_death</p>
+				<p>14 /people/ethnicity/geographic_distribution</p>
+				<p>15 /people/ethnicity/people</p>
+				<p>16 /people/person/children</p>
+				<p>17 /people/person/ethnicity</p>
+				<p>18 /people/person/nationality</p>
+				<p>19 /people/person/place_lived</p>
+				<p>20 /people/person/place_of_birth</p>
+				<p>21 /people/person/profession</p>
+				<p>22 /people/person/religion</p>
+				<p>23 /sports/sports_team/location</p>
+				<p>24 /sports/sports_team_location/teams</div>
+   </div>
+  <div class="main">
+      <div class="guide"><strong>请输入文本 | Please enter text:
+	  </strong></div>
+	  <form action="example" method="get">
+		<input type="submit" value="获得示例 | get an example">
+	  </form>
+	  <h2></h2>
+	  <form action="reltriples.html" method="get">
+		<textarea type="text" name="sentence" cols="105" rows="10" style="font-size: 15px;">{{ s }}</textarea>
+		<input type="submit" value="extract">
+	  </form>
+     <h2></h2>
+	 <div class="guide" style="height:10px;background-color: #ffffff;"></div>
+      <div class="guide" ><strong>抽取结果 | ERE Results：（关系类型，实体1，实体2）</strong></div>
+	  <div class="fakeimg" style="height:100px;background-color: #ffffff;">
+		<div class="guide1" ><p>所有实体：<p>All Entities</div>
+		<div class="div1" >
+			{% block entities %}{% endblock %}
+		</div>
+	  <div class="guide1"><p>所有关系类型：<p>All Relationship types</div>
+		<div class="div1" >	
+			{% block rels %}{% endblock %}
+		</div>
+	</div>
+	{% block allresults %}{% endblock %}
+  </div>
+</div>
+ <body>
+<div class="footer">
+  <h5>联系 | Email: slshi01@163.com</h5>
+</div>

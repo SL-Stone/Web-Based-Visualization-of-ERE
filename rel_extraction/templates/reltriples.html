@@ -1,0 +1,39 @@
+{% extends 'root.html' %}
+
+{% block entities %}
+	{% if eresults %}
+		{% for x in eresults %}
+			<form action="entities" method="get">
+				<textarea type="text" name="entity" style= "border-style: none; font-size: 15px;" readonly="false" cols="25" rows="1">{{x}}</textarea>
+			<input type="submit" value="&#10141;">
+			</form>
+		{% endfor %}
+	{% else %}无
+	{% endif %}	
+{% endblock %}
+
+{% block rels %}
+	{% if rresults %}
+		{% for x in rresults %}
+			<form action="rels" method="get">
+				<textarea type="text" name="rel" style= "border-style: none;font-size: 15px;" readonly="false" cols="31" rows="1">{{x}}</textarea>
+			<input type="submit" value="&#10141;">
+			</form>
+		{% endfor %}
+	{% else %}无
+	{% endif %}		
+{% endblock %}
+
+{% block allresults %}
+		<div class="guide" style="height:150px;background-color: #ffffff;"></div>
+		<div class="resultset">	
+			{% if results %}
+				{% for x in results %}
+					<p>{{ forloop.counter }}&nbsp; &nbsp; {{ x.1}}:&nbsp; {{ x.0 }}&nbsp; -->&nbsp; {{ x.2 }}
+				{% endfor %}				
+<p>共<font color="#00BB00">&nbsp; {{ results|length }}&nbsp; </font>个关系三元组
+			{% else %}
+				未发现关系组合 | No triples found !
+			{% endif %}	
+		</div>
+{% endblock %}
